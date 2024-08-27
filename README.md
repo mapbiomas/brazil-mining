@@ -34,13 +34,13 @@ Landsat TOA Mosaics:
         Apply a median filter to remove clouds and shadows.
 
 Example: users/solved/[0-Mosaic.js](./0-Mosaic.js)
-`// linkar aqui o script`
 
 
 #### 1.2. Cropping
 Crop mosaics to areas with known mining activities.
         
 Execute the bbox (bounding box) spliter script. The mining class is based on reference grids. These grids were generated based on the reference mining sites (see the reference data section).
+
 Example: users/solved/[1-BboxSplitter](./1-BboxSplitter.js)
 
 #### 2. Execute the Sampling Script
@@ -65,11 +65,11 @@ Example: users/solved/3 - Classification.js `// linkar aqui o script/notebook`
 Classification
 
 Model:
-        Use a U-Net classifier to perform semi-automatic classification on local servers.
+        Use a U-Net neural network to perform semi-automatic semantic segmentation on local servers.
 
 | PARAMETERS   |   VALUES|
 |:------------:|:-------:|
-Classifier   | U-Net |
+Neural network   | U-Net |
 Tile-Size    | 256 x 256 px |
 Samples      | 8400 |
 Attributes   | SWIR1, NIR1, RED, MNDWI, NDVI and NDSI|
