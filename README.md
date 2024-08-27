@@ -33,7 +33,7 @@ Landsat TOA Mosaics:
         Generate annual cloud-free mosaics from January 1st to December 31st from 1985-2023.
         Apply a median filter to remove clouds and shadows.
 
-Example: users/solved/0 - Mosaic.js 
+Example: users/solved/[0-Mosaic.js](./0-Mosaic.js)
 `// linkar aqui o script`
 
 
@@ -41,12 +41,12 @@ Example: users/solved/0 - Mosaic.js
 Crop mosaics to areas with known mining activities.
         
 Execute the bbox (bounding box) spliter script. The mining class is based on reference grids. These grids were generated based on the reference mining sites (see the reference data section).
-Example: users/solved/1 - Bbox Splitter.js
+Example: users/solved/[1-BboxSplitter](./1-BboxSplitter.js)
 
 #### 2. Execute the Sampling Script
 `// Colocar script GEE de geração / exportação de amostras`
 
-Example: users/solved/2 - Sampling.js `// linkar aqui o script`
+Example: users/solved/[2-Sampling.js](./2-Sampling.js)
 
 ### 4. Execute the Neural Network.
 #### 4.1. Training
@@ -88,14 +88,14 @@ Replace no-data values using the nearest available valid class.
 
 #### Temporal filter
 Temporal Filter: Apply a 3-year moving window to correct temporal inconsistencies.
-Example: users/solved/4 - Temporal Filter.js
+Example: users/solved/[4-TemporalFilter.js](./4-TemporalFilter.js)
 
 |RULE| INPUT (YEAR) | OUTPUT|
 |:--:|:------------:|:-----:|
 | - | T1 / T2 / T3 | T1 / T2 / T3 |
 | GR| Mi / N-Mi / Mi | Mi / Mi / Mi |
 | GR| N-Mi / Mi / N-Mi | N-Mi / N-Mi / N-Mi
-`// linkar aqui o script`
+
 
 
 #### Spatial filter
@@ -105,8 +105,7 @@ Spatial Filter: Use GEE's connectedPixelCount to remove isolated pixels, ensurin
 #### Frequency filter
 Frequency Filter: Remove classes with less than 10% temporal persistence.
 
-Example: users/solved/5 - Frequency Filter.js
-`// linkar aqui o script`
+Example: users/solved/[5-FrequencyFilter.js](./5-FrequencyFilter.js)
 
 ## References
 #### REFERENCE DATA
