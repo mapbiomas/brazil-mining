@@ -45,7 +45,6 @@ Example: users/solved/[1-BboxSplitter](./1-BboxSplitter.js)
 
 #### 2. Execute the Sampling Script
 `// Colocar script GEE de geração / exportação de amostras`
-
 Example: users/solved/[2-Sampling.js](./2-Sampling.js)
 
 ### 4. Execute the Neural Network.
@@ -58,27 +57,23 @@ Training Samples:
 
 #### 4.2. Prediction
 `// Atualizar os parametros e ver se precisamos colocar outra tabela para os parâmetros de MG`
+Every prediction is a binary set of pixel values. 0 - "non-mining", 1 - "mining"
+Jupyter Notebook: [mining_box_mb9.ipynb](./mining_box_mb9.ipynb)
 
-Every classification is a binary set of pixel values. 0 - "non-mining", 1 - "mining"
-Example: users/solved/3 - Classification.js `// linkar aqui o script/notebook`
-
-Classification
+Semantic Segmentation
 
 Model:
-        Use a U-Net neural network to perform semi-automatic semantic segmentation on local servers.
+Use a U-Net neural network to perform semantic segmentation on local servers.
 
 | PARAMETERS   |   VALUES|
 |:------------:|:-------:|
 Neural network   | U-Net |
 Tile-Size    | 256 x 256 px |
 Samples      | 8400 |
-Attributes   | SWIR1, NIR1, RED, MNDWI, NDVI and NDSI|
-Classes      | 2 (Mining and Not-Mining)|
+Attributes   | SWIR1, NIR, RED,GREEN, MNDWI, NDVI and MNDWI|
+Output       | 2 (Mining and Not-Mining)|
 
 ###### Table 2 - CNN attributes and classification parameters. In total, six (6) distinct attributes were used.
-
-Example: users/solved/4 - Mining Classification.ipynb
-`// linkar aqui o script`
 
 ### Apply filters
 
