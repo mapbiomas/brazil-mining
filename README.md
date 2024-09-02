@@ -67,11 +67,11 @@ Use a U-Net neural network to perform semantic segmentation on local servers.
 
 | PARAMETERS   |   VALUES|
 |:------------:|:-------:|
-Neural network   | U-Net |
-Tile-Size    | 256 x 256 px |
-Samples      | 8400 |
-Attributes   | SWIR1, NIR, RED,GREEN, MNDWI, NDVI and MNDWI|
-Output       | 2 (Mining and Not-Mining)|
+Neural network | U-Net |
+Tile-Size      | 256 x 256 px |
+Samples        | 42605(Train), 22420 (Validation)|
+Attributes     | SWIR1, NIR, RED,GREEN, MNDWI, NDVI and MNDWI|
+Output         | 2 (Mining and Not-Mining)|
 
 ###### Table 2 - CNN attributes and classification parameters. In total, six (6) distinct attributes were used.
 
