@@ -49,7 +49,7 @@ Example: users/solved/[2-Sampling.js](./2-Sampling.js)
 
 ### 4. Execute the Neural Network.
 #### 4.1. Training
-`Onde está a diferença do modelo de Minas Gerais? Treino? Predição? Os dois?`
+<!-- `Onde está a diferença do modelo de Minas Gerais? Treino? Predição? Os dois?` -->
 
 Training Samples:
         Select training samples based on mining (Mi) and non-mining (N-Mi) categories.
@@ -76,14 +76,10 @@ Output         | 2 (Mining and Not-Mining)|
 ###### Table 2 - CNN attributes and segmentation parameters. In total, six (6) distinct attributes were used.
 
 ### Apply filters
-
-#### Gap-fill
-Replace no-data values using the nearest available valid class.
-`// linkar aqui o script`
-
-#### Temporal filter
+#### Gap-fill & Temporal filter
+Gap-fill: Replace no-data values using the nearest available valid class.
 Temporal Filter: Apply a 3-year moving window to correct temporal inconsistencies.
-Example: users/solved/[4-TemporalFilter.js](./4-TemporalFilter.js)
+Example: users/solved/[3-GapFill_TemporalFilter.js](./3-GapFill_TemporalFilter.js)
 
 |RULE| INPUT (YEAR) | OUTPUT|
 |:--:|:------------:|:-----:|
@@ -95,7 +91,7 @@ Example: users/solved/[4-TemporalFilter.js](./4-TemporalFilter.js)
 
 #### Spatial filter
 Spatial Filter: Use GEE's connectedPixelCount to remove isolated pixels, ensuring a minimum mapping unit of ~1 ha.
-`// linkar aqui o script`
+Example: users/solved/[4-SpatialFilter.js](./4-SpatialFilter)
 
 #### Frequency filter
 Frequency Filter: Remove classes with less than 10% temporal persistence.

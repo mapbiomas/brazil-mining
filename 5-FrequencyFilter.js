@@ -240,7 +240,7 @@ Map.addLayer(mining,{max:30},'Class Mining - '+year)
 Export.image.toAsset({
       image: mining.rename('classification').toByte().set({'theme':'MINERACAO','year':year,'version':''+version,'collection':5.0,'source':'solved'}),
       description:'Mapbiomas5_MINING_' + year,
-      assetId: 'projects/mapbiomas-workspace/TRANSVERSAIS/MINERACAO5-FT/'+year+'-'+version,
+      assetId: 'projects/mapbiomas-workspace/TRANSVERSAIS/MINERACAO9-FT/'+year+'-'+version,
       scale: 30,
       maxPixels:1e13,
       region: geometry
