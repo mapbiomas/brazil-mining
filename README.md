@@ -58,7 +58,6 @@ Training Samples:
 #### 4.2. Prediction
 <!-- `// Atualizar os parametros e ver se precisamos colocar outra tabela para os parâmetros de MG` -->
 Every prediction is a binary set of pixel values. 0 - "non-mining", 1 - "mining"
-Jupyter Notebook: [mining_box_mb9.ipynb](./mining_box_mb9.ipynb)
 
 Semantic Segmentation
 
@@ -75,11 +74,14 @@ Output         | 2 (Mining and Not-Mining)|
 
 ###### Table 2 - CNN attributes and segmentation parameters. In total, six (6) distinct attributes were used.
 
+Example: [4-Jupyter Notebook](./mining_box_mb9.ipynb)
+
+
 ### Apply filters
 #### Gap-fill & Temporal filter
 Gap-fill: Replace no-data values using the nearest available valid class.
 Temporal Filter: Apply a 3-year moving window to correct temporal inconsistencies.
-Example: users/solved/[3-GapFill_TemporalFilter.js](./3-GapFill_TemporalFilter.js)
+Example: [3-GapFill_TemporalFilter.js](./3-GapFill_TemporalFilter.js)
 
 |RULE| INPUT (YEAR) | OUTPUT|
 |:--:|:------------:|:-----:|
