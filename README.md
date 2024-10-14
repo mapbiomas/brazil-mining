@@ -33,7 +33,7 @@ Landsat TOA Mosaics:
         Generate annual cloud-free mosaics from January 1st to December 31st from 1985-2023.
         Apply a median filter to remove clouds and shadows.
 
-Example: users/solved/[0-Mosaic.js](./0-Mosaic.js)
+Example: [0-Mosaic.js](./0-Mosaic.js)
 
 
 #### 1.2. Cropping
@@ -41,11 +41,11 @@ Crop mosaics to areas with known mining activities.
         
 Execute the bbox (bounding box) spliter script. The mining class is based on reference grids. These grids were generated based on the reference mining sites (see the reference data section).
 
-Example: users/solved/[1-BboxSplitter](./1-BboxSplitter.js)
+Example: [1-BboxSplitter](./1-BboxSplitter.js)
 
 #### 2. Execute the Sampling Script
 <!-- `// Colocar script GEE de geração / exportação de amostras` -->
-Example: users/solved/[2-Sampling.js](./2-Sampling.js)
+Example: [2-Sampling.js](./2-Sampling.js)
 
 ### 4. Execute the Neural Network.
 #### 4.1. Training
@@ -91,12 +91,12 @@ Example: users/solved/[3-GapFill_TemporalFilter.js](./3-GapFill_TemporalFilter.j
 
 #### Spatial filter
 Spatial Filter: Use GEE's connectedPixelCount to remove isolated pixels, ensuring a minimum mapping unit of ~1 ha.
-Example: users/solved/[4-SpatialFilter.js](./4-SpatialFilter)
+Example: [4-SpatialFilter.js](./4-SpatialFilter)
 
 #### Frequency filter
 Frequency Filter: Remove classes with less than 10% temporal persistence.
 
-Example: users/solved/[5-FrequencyFilter.js](./5-FrequencyFilter.js)
+Example: [5-FrequencyFilter.js](./5-FrequencyFilter.js)
 
 ## References
 #### REFERENCE DATA
