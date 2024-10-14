@@ -74,7 +74,7 @@ Output         | 2 (Mining and Not-Mining)|
 
 ###### Table 2 - CNN attributes and segmentation parameters. In total, six (6) distinct attributes were used.
 
-Example: [3-Jupyter Notebook](./mining_box_mb9.ipynb)
+Example: [3-Jupyter Notebook](./3-mining_box_mb9.ipynb)
 
 
 ### 4. Apply filters
