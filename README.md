@@ -47,15 +47,15 @@ Example: [1-BboxSplitter](./1-BboxSplitter.js)
 <!-- `// Colocar script GEE de geração / exportação de amostras` -->
 Example: [2-Sampling.js](./2-Sampling.js)
 
-### 4. Execute the Neural Network.
-#### 4.1. Training
+### 3. Execute the Neural Network.
+#### 3.1. Training
 <!-- `Onde está a diferença do modelo de Minas Gerais? Treino? Predição? Os dois?` -->
 
 Training Samples:
         Select training samples based on mining (Mi) and non-mining (N-Mi) categories.
         No differentiation between artisanal and industrial mining is made during the segmentation.
 
-#### 4.2. Prediction
+#### 3.2. Prediction
 <!-- `// Atualizar os parametros e ver se precisamos colocar outra tabela para os parâmetros de MG` -->
 Every prediction is a binary set of pixel values. 0 - "non-mining", 1 - "mining"
 
@@ -74,14 +74,14 @@ Output         | 2 (Mining and Not-Mining)|
 
 ###### Table 2 - CNN attributes and segmentation parameters. In total, six (6) distinct attributes were used.
 
-Example: [4-Jupyter Notebook](./mining_box_mb9.ipynb)
+Example: [3-Jupyter Notebook](./mining_box_mb9.ipynb)
 
 
-### Apply filters
-#### Gap-fill & Temporal filter
+### 4. Apply filters
+#### 4.1. Gap-fill & Temporal filter
 Gap-fill: Replace no-data values using the nearest available valid class.
 Temporal Filter: Apply a 3-year moving window to correct temporal inconsistencies.
-Example: [3-GapFill_TemporalFilter.js](./3-GapFill_TemporalFilter.js)
+Example: [4-GapFill_TemporalFilter.js](./4-GapFill_TemporalFilter.js)
 
 |RULE| INPUT (YEAR) | OUTPUT|
 |:--:|:------------:|:-----:|
@@ -91,14 +91,14 @@ Example: [3-GapFill_TemporalFilter.js](./3-GapFill_TemporalFilter.js)
 
 
 
-#### Spatial filter
+#### 4.2. Spatial filter
 Spatial Filter: Use GEE's connectedPixelCount to remove isolated pixels, ensuring a minimum mapping unit of ~1 ha.
-Example: [4-SpatialFilter.js](./4-SpatialFilter)
+Example: [5-SpatialFilter.js](./5-SpatialFilter)
 
-#### Frequency filter
+#### 4.3. Frequency filter
 Frequency Filter: Remove classes with less than 10% temporal persistence.
 
-Example: [5-FrequencyFilter.js](./5-FrequencyFilter.js)
+Example: [6-FrequencyFilter.js](./6-FrequencyFilter.js)
 
 ## References
 #### REFERENCE DATA
