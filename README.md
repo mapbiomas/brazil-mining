@@ -1,29 +1,23 @@
-<div class="fluid-row" id="header">
-    <div id="column">
-        <div class = "blocks">
-            <img src='./misc/solved-logo.jpeg' height='auto' width='200' align='right'>
-        </div>
-    </div>
-    <h1 class="title toc-ignore">Mining</h1>
-    <h4 class="author"><em>Solved - Solutions in Geoinformation</em></h4>
-</div>
+<p align="right">
+  <img src="./misc/Solved_ vetor 1.png" width="200">
+</p>
+
+# Industrial and Artisanal Mining Detection
+
+#### Developed by: _[Solved - Soluções em Geoinformação](https://solved.eco.br)_
 
 ## About
 This repository provides the steps to detect mining areas using Landsat Top of Atmosphere (TOA) mosaics.
 
-The detection process focuses on identifying mining areas using Landsat TOA mosaics. The process involves generating annual cloud-free mosaics using Google Earth Engine (GEE) and applying a U-Net deep learning model for segmentation.
+The detection process focuses on identifying mining areas using Landsat TOA mosaics. The process involves generating annual cloud-free mosaics using Google Earth Engine (GEE) and applying a [U-Net](https://arxiv.org/abs/1505.04597) deep learning model for segmentation.
 
-For more information about the methodology, please see the [Mining Algorithm Theoretical Basis Document](https://brasil.mapbiomas.org/wp-content/uploads/sites/4/2024/08/Mining-Appendix-ATBD-Collection-9.docx.pdf)
+For more information about the methodology, please consult the [Mining Algorithm Theoretical Basis Document](https://brasil.mapbiomas.org/wp-content/uploads/sites/4/2024/08/Mining-Appendix-ATBD-Collection-9.docx.pdf)
 
-<!-- # Release History
+# How to use
+## 0. Prepare environment.
+One must have a Google Earth Engine Account ([Get Started](https://earthengine.google.com)), be able to create a GEE repository in the code editor and upload the modules in it.
 
-* 1.0.0
-    * Description -->
-
-## How to use
-
-<!-- ### 1. Prepare environment. 
-1.1. You need to create a GEE repository in the code editor and upload the modules in it. Example: users/solved/index_lib.js -->
+Some sort of GPU capability is also required for the training process.
 
 ### 1. Start the mosaic and Grid generation. 
 
