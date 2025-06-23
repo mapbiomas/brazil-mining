@@ -19,38 +19,27 @@ One must have a Google Earth Engine Account ([Get Started](https://earthengine.g
 
 Some sort of GPU capability is also required for the training process.
 
-### 1. Start the mosaic and Grid generation. 
-
-#### 1.1. Start processing the annual cloud free composities
+## 1. Start processing the annual cloud free composities
 Landsat TOA Mosaics:
         Use USGS Landsat Collection 2 Tier 1 TOA imagery.
         Generate annual cloud-free mosaics from January 1st to December 31st from 1985-2023.
         Apply a median filter to remove clouds and shadows.
 
-Example: [0-Mosaic.js](./0-Mosaic.js)
+* Script: [1-mosaic-generation.js](./1-mosaic-generation.js)
 
+## 2. Sampling Script
+Vizualise the training and validation regions, along with the supervised layer available publicly
 
-#### 1.2. Cropping
-Crop mosaics to areas with known mining activities.
-        
-Execute the bbox (bounding box) spliter script. The mining class is based on reference grids. These grids were generated based on the reference mining sites (see the reference data section).
+* Script: [2-train-test-dataset.js](./2-train-test-dataset.js)
 
-Example: [1-BboxSplitter](./1-BboxSplitter.js)
-
-#### 2. Execute the Sampling Script
-<!-- `// Colocar script GEE de geração / exportação de amostras` -->
-Example: [2-Sampling.js](./2-Sampling.js)
-
-### 3. Execute the Neural Network.
-#### 3.1. Training
-<!-- `Onde está a diferença do modelo de Minas Gerais? Treino? Predição? Os dois?` -->
-
+## 3. Execute the Neural Network.
+### 3.1. Training
 Training Samples:
         Select training samples based on mining (Mi) and non-mining (N-Mi) categories.
         No differentiation between artisanal and industrial mining is made during the segmentation.
 
-#### 3.2. Prediction
-<!-- `// Atualizar os parametros e ver se precisamos colocar outra tabela para os parâmetros de MG` -->
+
+### 3.2. Prediction
 Every prediction is a binary set of pixel values. 0 - "non-mining", 1 - "mining"
 
 Semantic Segmentation
@@ -62,20 +51,20 @@ Use a U-Net neural network to perform semantic segmentation on local servers.
 |:------------:|:-------:|
 Neural network | U-Net |
 Tile-Size      | 256 x 256 px |
-Samples        | 42605(Train), 22420 (Validation)|
-Attributes     | SWIR1, NIR, RED, GREEN, NDVI and MNDWI|
+Samples        | Train, Validation|
+Attributes     | green, red, nir, swir1, NDVI, MNDWI|
 Output         | 2 (Mining and Not-Mining)|
 
-###### Table 2 - CNN attributes and segmentation parameters. In total, six (6) distinct attributes were used.
+##### Table 2 - CNN attributes and segmentation parameters. In total, six (6) distinct attributes were used.
 
-Example: [3-Jupyter Notebook](./3-mining_box_mb9.ipynb)
+* Main Script: [3-Jupyter Notebook](./3-mb10_mining.ipynb)
 
 
-### 4. Apply filters
-#### 4.1. Gap-fill & Temporal filter
+# Filter Chain
+## 4. Gap-fill & Temporal filter
 Gap-fill: Replace no-data values using the nearest available valid class.
 Temporal Filter: Apply a 3-year moving window to correct temporal inconsistencies.
-Example: [4-GapFill_TemporalFilter.js](./4-GapFill_TemporalFilter.js)
+* Script: [4-GapFill_TemporalFilter.js](./4-GapFill_TemporalFilter.js)
 
 |RULE| INPUT (YEAR) | OUTPUT|
 |:--:|:------------:|:-----:|
@@ -84,15 +73,14 @@ Example: [4-GapFill_TemporalFilter.js](./4-GapFill_TemporalFilter.js)
 | GR| N-Mi / Mi / N-Mi | N-Mi / N-Mi / N-Mi
 
 
-
-#### 4.2. Spatial filter
+## 5. Spatial filter
 Spatial Filter: Use GEE's connectedPixelCount to remove isolated pixels, ensuring a minimum mapping unit of ~1 ha.
-Example: [5-SpatialFilter.js](./5-SpatialFilter)
+* Script: [5-SpatialFilter.js](./5-SpatialFilter)
 
-#### 4.3. Frequency filter
+## 6. Frequency filter
 Frequency Filter: Remove classes with less than 10% temporal persistence.
 
-Example: [6-FrequencyFilter.js](./6-FrequencyFilter.js)
+* Script: [6-FrequencyFilter.js](./6-FrequencyFilter.js)
 
 ## References
 #### REFERENCE DATA
