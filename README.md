@@ -64,7 +64,7 @@ Output         | 2 (Mining and Not-Mining)|
 ## 4. Gap-fill & Temporal filter
 Gap-fill: Replace no-data values using the nearest available valid class.
 Temporal Filter: Apply a 3-year moving window to correct temporal inconsistencies.
-* Script: [4-GapFill_TemporalFilter.js](./4-GapFill_TemporalFilter.js)
+* Script: [4-gap-fill-temporal-filter](./4-gap-fill-temporal-filter.js)
 
 |RULE| INPUT (YEAR) | OUTPUT|
 |:--:|:------------:|:-----:|
@@ -75,12 +75,12 @@ Temporal Filter: Apply a 3-year moving window to correct temporal inconsistencie
 
 ## 5. Spatial filter
 Spatial Filter: Use GEE's connectedPixelCount to remove isolated pixels, ensuring a minimum mapping unit of ~1 ha.
-* Script: [5-SpatialFilter.js](./5-SpatialFilter)
+* Script: [5-spatial-filter](./5-spatial-filter.js)
 
 ## 6. Frequency filter
 Frequency Filter: Remove classes with less than 10% temporal persistence.
 
-* Script: [6-FrequencyFilter.js](./6-FrequencyFilter.js)
+* Script: [6-frequency-filter](./6-frequency-filter.js)
 
 ## References
 #### REFERENCE DATA

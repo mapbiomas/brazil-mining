@@ -1,66 +1,27 @@
-/**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var imageCollection = ee.ImageCollection("projects/mapbiomas-workspace/TRANSVERSAIS/ZONACOSTEIRA"),
-    imageCollection2 = ee.ImageCollection("users/luizcf14/APICUM"),
-    srtm = ee.Image("CGIAR/SRTM90_V4"),
-    geometry = 
-    /* color: #d63000 */
-    /* shown: false */
-    ee.Geometry.Polygon(
-        [[[-70.92571930009431, -2.9398276503880756],
-          [-74.96868805009431, -7.25542040091963],
-          [-71.54095367509431, -11.158748486870778],
-          [-65.21282867509431, -12.19159993976132],
-          [-58.0519188126152, -22.298539632079674],
-          [-58.5792625626152, -30.400633580270206],
-          [-53.3058250626152, -34.11570652774475],
-          [-40.1222313126152, -22.135808932044693],
-          [-34.4093406876152, -5.122995202699253],
-          [-51.8116844376152, 4.796194408179076],
-          [-62.94473220828149, 5.2738728631288865],
-          [-70.3566063126152, 1.4618032412787385]]]);
-/***** End of imports. If edited, may not auto-convert in the playground. *****/
-// Temporal filter algorithm (v4)
-// @author: Damares Resende
-// @email: dcresende92@gmail.com
-
 //------------------------------------- Flags -----------------------------------------
 var F = 3;
-var MG = 5;
 var MN = 30
 var NFv = 12;
-var PD = 23;
-var NV = 10;
-var AG = 33;
-var AQ = 31;
 var NO = 50;
 var mask = -1;
 
 var firstYear = 1985;
-var lastYear = 2019;
+var lastYear  = 2024;
+var userEEProject='USER_PROJECT_ID'
 
 //------------------------------- Load data function ----------------------------------
 var loadData = function() {
   var maps = [];
   var i = 0; 
-  for(var year = firstYear; year <= lastYear; year++){ 
-    var image = ee.Image('projects/mapbiomas-workspace/TRANSVERSAIS/MINERACAO5/class_3_'+year).remap([1,2],[0,30]).rename('classification').toByte()
-    
+  for(var year = firstYear; year <= lastYear; year++){
+    var image = ee.Image('projects/'+userEEProject+'/assets/LANDSAT/MINERACAO/out_deepLearning/'+year).set('year',year).remap([0,1],[0,AQ]).rename('classification').toByte()
     var imgeMerge =ee.ImageCollection([image]).max()
-    
     maps[i] = imgeMerge;
-    var clusterizedImage;
-    if(year == 1985){
-      clusterizedImage = ee.Image("projects/mapbiomas-workspace/TRANSVERSAIS/MINERACAO5/mosaic_"+1986) //As emergencial correction for 1985 we change the mosaic representation to 1986
-    }else{
-      clusterizedImage = ee.Image("projects/mapbiomas-workspace/TRANSVERSAIS/MINERACAO5/mosaic_"+year)
-    }
-clusterizedImage = clusterizedImage.select(0).unmask(0)
-    var nodata = ee.Image(NO).mask(clusterizedImage.select(0).eq(0)).rename('classification').toByte();
-   // Map.addLayer(nodata,{},'Not Observed - '+year,false)
+    var mosaic = ee.Image('projects/'+userEEProject+'/assets/USER_PATH/mosaic_'+year);
+    mosaic = mosaic.select(0).unmask(0);
+    var nodata = ee.Image(NO).mask(mosaic.select(0).eq(0)).rename('classification').toByte();
     maps[i] =  maps[i].updateMask(maps[i].lte(33)).unmask(0);
-    maps[i] = ee.ImageCollection([maps[i],nodata]).mosaic()
-    //maps[i] =  maps[i].add(nodata.unmask(0))
-    //Map.addLayer(maps[i],{},' '+year,false)
+    maps[i] = ee.ImageCollection([maps[i],nodata]).mosaic().set({"year":year});
     i = i + 1;
   }
 
@@ -201,6 +162,16 @@ var filterLastYears = function(maps) {
 }
 
 //------------------------------------ Run Filter --------------------------------------
+var ROI = ee.Geometry.Polygon(
+  [
+      [
+          [-75.46319738935682, 6.627809464162168],
+          [-75.46319738935682, -34.62753178950752],
+          [-32.92413488935683, -34.62753178950752],
+          [-32.92413488935683, 6.627809464162168]
+      ]
+  ], null, false
+);
 
 var maps = loadData();
 var originals = maps;
@@ -226,15 +197,15 @@ for(var i = 0; i < (lastYear-firstYear)+1; i++){
   Map.addLayer(originals[i].updateMask(originals[i].neq(mask)),{min: 0, max: 33,palette:mapbiomasColors}, "Map " + (firstYear+i),false);
 }
  
-
+var version = 1;
 for(var year = firstYear; year <= lastYear; year++) {
   
   Export.image.toAsset({
-      image: (ee.ImageCollection([(maps[(year-firstYear)]).rename('classification').toByte()]).mosaic()).set({'classification':1,'year':year,'version':4,'region':'Brasil'}).toByte(),
-      description:'Mapbiomas5_ft_' + year,
-      assetId: 'projects/mapbiomas-workspace/TRANSVERSAIS/MINERACAO5/ft_2_'+year+'',
+      image: (ee.ImageCollection([(maps[(year-firstYear)]).rename('classification').toByte()]).mosaic()).set({'classification':1,'year':year,'version':version,'region':'Brasil'}).toByte(),
+      description:'ft_1_BR_v'+version+'_'+year,
+      assetId: 'projects/'+userEEProject+'/assets/LANDSAT/MINERACAO/unet_ft/ft_1_BR_v'+version+'_'+year,
       scale: 30,
       maxPixels:1e13,
-      region: geometry
+      region: ROI
     });
 }
