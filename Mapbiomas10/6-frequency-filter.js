@@ -12,7 +12,7 @@ var getImageCollection = function(firstYear, lastYear, userEEProject, versionSF)
  * @Return ee.ImageCollection
 **/
 var filterPixelFrequency = function(firstYear, lastYear, userEEProject, imc,cutPercentage,classID){
-  var temporalSeries = (firstYear - lastYear) + 1;
+  var temporalSeries = (lastYear - firstYear) + 1;
   var imcFreq = imc.map(function(e){ return e.eq(classID)}).sum().divide(temporalSeries).multiply(100); //Frequency Image
   var filteredImages= ee.List([]);
   Map.addLayer(imcFreq,{min:0,max:100,palette:['fff9f9','ff0000','efff00','27ff00','ef00ff']},'Freq -'+classID)
